@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Achados da Shopee - ofertas, novidades e produtos incríveis.">
+
+  <meta name="description" content="Achados da Shopee - ofertas e produtos incríveis.">
+
   <title>Achados da Shopee</title>
 
   <style>
@@ -19,7 +21,6 @@
       color: #222;
     }
 
-    /* CABEÇALHO */
     header {
       background: #111;
       color: white;
@@ -53,12 +54,11 @@
       font-size: 14px;
     }
 
-    /* BANNER */
     .banner {
       background: linear-gradient(135deg, #ff5a00, #ff8a00);
       color: white;
       text-align: center;
-      padding: 55px 20px;
+      padding: 60px 20px;
     }
 
     .banner h1 {
@@ -79,7 +79,6 @@
       padding: 14px 25px;
       border-radius: 30px;
       font-weight: bold;
-      transition: 0.2s;
     }
 
     .banner-button:hover {
@@ -87,14 +86,12 @@
       color: #111;
     }
 
-    /* CONTEÚDO */
     main {
       max-width: 1100px;
       margin: auto;
       padding: 30px 16px 50px;
     }
 
-    /* BUSCA */
     .search {
       width: 100%;
       padding: 16px;
@@ -109,7 +106,6 @@
       border-color: #ff5a00;
     }
 
-    /* TÍTULOS */
     .section-title {
       display: flex;
       justify-content: space-between;
@@ -127,7 +123,6 @@
       font-weight: bold;
     }
 
-    /* CATEGORIAS */
     .categories {
       display: flex;
       gap: 10px;
@@ -145,7 +140,6 @@
       cursor: pointer;
       white-space: nowrap;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: 0.2s;
     }
 
     .category:hover,
@@ -154,7 +148,6 @@
       color: white;
     }
 
-    /* PRODUTOS */
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -219,7 +212,6 @@
       background: #ff5a00;
     }
 
-    /* MENSAGEM SEM PRODUTOS */
     .empty {
       grid-column: 1 / -1;
       background: white;
@@ -234,7 +226,6 @@
       margin-bottom: 10px;
     }
 
-    /* RODAPÉ */
     footer {
       background: #111;
       color: white;
@@ -268,7 +259,6 @@
       color: #ff5a00;
     }
 
-    /* CELULAR */
     @media (max-width: 600px) {
 
       .header-content {
@@ -327,9 +317,9 @@
 
 <body>
 
-  <!-- CABEÇALHO -->
   <header>
     <div class="header-content">
+
       <div class="logo">
         🛍️ Achados <span>da Shopee</span>
       </div>
@@ -337,11 +327,10 @@
       <div class="tagline">
         🔥 Ofertas e achadinhos todos os dias
       </div>
+
     </div>
   </header>
 
-
-  <!-- BANNER -->
   <section class="banner">
 
     <h1>Achados da Shopee 🔥</h1>
@@ -356,10 +345,8 @@
 
   </section>
 
-
   <main>
 
-    <!-- BUSCA -->
     <input
       type="search"
       id="search"
@@ -367,8 +354,6 @@
       placeholder="🔎 Procurar um produto..."
     >
 
-
-    <!-- CATEGORIAS -->
     <div class="section-title">
       <h2>🛍️ Categorias</h2>
       <span>Achadinhos</span>
@@ -402,8 +387,6 @@
 
     </div>
 
-
-    <!-- PRODUTOS -->
     <div class="section-title" id="produtos">
       <h2>🔥 Achadinhos em destaque</h2>
     </div>
@@ -412,8 +395,6 @@
 
   </main>
 
-
-  <!-- RODAPÉ -->
   <footer>
 
     <h3>🛍️ Achados da Shopee</h3>
@@ -440,52 +421,36 @@
 
   </footer>
 
-
   <script>
 
     /*
-    ==================================================
-    ADICIONE SEUS PRODUTOS AQUI
-    ==================================================
+    ==========================================
+    SEUS PRODUTOS
+    ==========================================
 
-    Copie o modelo abaixo e coloque dentro dos
-    colchetes da lista "products".
-
-    Exemplo:
+    Para adicionar um produto, copie este modelo:
 
     {
-      name: "Fone Bluetooth",
+      name: "Nome do produto",
       category: "Eletrônicos",
       price: "R$ 29,90",
-      image: "LINK_DA_FOTO",
-      link: "SEU_LINK_DA_SHOPEE"
+      image: "LINK DA FOTO",
+      link: "LINK DA SHOPEE"
     }
 
-    ==================================================
     */
 
     const products = [
 
-      /*
       {
-        name: "Fone Bluetooth",
-        category: "Eletrônicos",
-        price: "R$ 29,90",
-        image: "https://exemplo.com/foto.jpg",
-        link: "https://shopee.com.br/seu-link"
-      },
-
-      {
-        name: "Tênis Masculino",
-        category: "Moda",
-        price: "R$ 79,90",
-        image: "https://exemplo.com/tenis.jpg",
-        link: "https://shopee.com.br/seu-link"
+        name: "Seu primeiro achadinho",
+        category: "Outros",
+        price: "R$ 00,00",
+        image: "https://via.placeholder.com/500x500?text=Achado+da+Shopee",
+        link: "https://shopee.com.br/"
       }
-      */
 
     ];
-
 
     const productList =
       document.getElementById("productList");
@@ -495,12 +460,10 @@
 
     let selectedCategory = "Todos";
 
-
     function showProducts() {
 
       const searchText =
         search.value.toLowerCase().trim();
-
 
       const filteredProducts =
         products.filter(product => {
@@ -518,7 +481,6 @@
 
         });
 
-
       if (filteredProducts.length === 0) {
 
         productList.innerHTML = `
@@ -530,12 +492,11 @@
             </div>
 
             <h3>
-              Seus produtos aparecerão aqui!
+              Nenhum produto encontrado.
             </h3>
 
             <p>
-              Adicione seus achadinhos no código
-              deste arquivo.
+              Tente procurar outro produto.
             </p>
 
           </div>
@@ -544,7 +505,6 @@
 
         return;
       }
-
 
       productList.innerHTML =
         filteredProducts.map(product => `
@@ -589,9 +549,6 @@
 
     }
 
-
-    /* CATEGORIAS */
-
     document
       .querySelectorAll(".category")
       .forEach(button => {
@@ -615,16 +572,10 @@
 
       });
 
-
-    /* BUSCA */
-
     search.addEventListener(
       "input",
       showProducts
     );
-
-
-    /* INICIALIZA */
 
     showProducts();
 
