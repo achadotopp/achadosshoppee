@@ -1,94 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Achados Shopee</title>
-<style>
-:root{--orange:#ff5a00;--black:#111;--light:#f6f6f6;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--black)}
-header{background:linear-gradient(135deg,#111,#222);color:white;padding:28px 18px;text-align:center}
-.logo{font-size:32px;font-weight:900}.logo span{color:var(--orange)}
-header p{margin:8px 0 20px;color:#ddd}
-.search{max-width:650px;margin:auto;display:flex;background:white;border-radius:12px;overflow:hidden}
-.search input{flex:1;padding:15px;border:0;outline:0;font-size:16px}.search button{background:var(--orange);border:0;color:white;padding:0 20px;font-weight:bold}
-nav{display:flex;gap:10px;overflow:auto;padding:14px;background:white;justify-content:center}
-nav button{border:1px solid #ddd;background:white;border-radius:20px;padding:9px 15px;white-space:nowrap;cursor:pointer}
-nav button.active,nav button:hover{background:var(--orange);color:white;border-color:var(--orange)}
-main{max-width:1100px;margin:auto;padding:25px 16px}
-.hero{background:var(--orange);color:white;border-radius:18px;padding:28px;margin-bottom:24px}
-.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:0}
-h2{margin:25px 0 14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
-.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px #00000012;display:flex;flex-direction:column}
-.product-img{height:190px;background:#eee;display:flex;align-items:center;justify-content:center;font-size:60px}
-.card-body{padding:15px;display:flex;flex-direction:column;gap:9px;flex:1}.tag{color:var(--orange);font-size:12px;font-weight:bold}.card h3{margin:0;font-size:17px}.price{font-size:22px;font-weight:900}.old{font-size:13px;color:#888;text-decoration:line-through}.offer{margin-top:auto;background:var(--orange);color:white;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold}
-footer{background:#111;color:#aaa;text-align:center;padding:28px 16px;margin-top:35px}footer strong{color:white}
-.notice{font-size:12px;color:#777;margin-top:20px}
-@media(max-width:600px){.logo{font-size:27px}.hero h1{font-size:25px}.product-img{height:160px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Achados Shopee</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      color: #ddd;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px 15px 50px;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .titulo h2 {
+      margin-bottom: 8px;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .vazio {
+      background: white;
+      border: 2px dashed #ddd;
+      border-radius: 15px;
+      padding: 45px 20px;
+      text-align: center;
+      grid-column: 1 / -1;
+      color: #666;
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 25px 15px;
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="logo">ACHADOS <span>SHOPEE</span></div>
-  <p>Ofertas, novidades e produtos que valem a pena conferir 🔥</p>
-  <div class="search"><input id="search" placeholder="O que você está procurando?"><button onclick="filterProducts()">Buscar</button></div>
-</header>
 
-<nav>
-  <button class="active" onclick="setCategory('Todos',this)">Todos</button>
-  <button onclick="setCategory('Casa',this)">Casa</button>
-  <button onclick="setCategory('Eletrônicos',this)">Eletrônicos</button>
-  <button onclick="setCategory('Beleza',this)">Beleza</button>
-  <button onclick="setCategory('Moda',this)">Moda</button>
-  <button onclick="setCategory('Ofertas',this)">🔥 Ofertas</button>
-</nav>
+  <header>
+    <h1>🛍️ Achados Shopee</h1>
+    <p>Os melhores achadinhos em um só lugar!</p>
+  </header>
 
-<main>
-<section class="hero">
-  <h1>🔥 Achados que você precisa conhecer!</h1>
-  <p>Confira produtos populares da Shopee e aproveite as ofertas.</p>
-</section>
+  <main class="container">
 
-<h2>Produtos em destaque</h2>
-<div class="grid" id="products"></div>
-<p class="notice">* Os produtos e preços abaixo são exemplos. Substitua os links pelos seus links de afiliado da Shopee.</p>
-</main>
+    <section class="titulo">
+      <h2>🔥 Achados da Shopee</h2>
+      <p>Confira nossas ofertas e achadinhos!</p>
+    </section>
 
-<footer>
-  <strong>Achados Shopee</strong><br><br>
-  Encontre produtos, ofertas e novidades em um só lugar.
-</footer>
+    <section class="produtos">
 
-<script>
-const products=[
- {name:"Fone Bluetooth Sem Fio",cat:"Eletrônicos",price:"R$ 39,90",old:"R$ 79,90",icon:"🎧",deal:true},
- {name:"Organizador Multiuso",cat:"Casa",price:"R$ 24,90",old:"R$ 49,90",icon:"🗂️",deal:true},
- {name:"Kit de Pincéis de Maquiagem",cat:"Beleza",price:"R$ 19,90",old:"R$ 39,90",icon:"💄",deal:true},
- {name:"Luminária LED",cat:"Casa",price:"R$ 34,90",old:"R$ 59,90",icon:"💡",deal:false},
- {name:"Smartwatch",cat:"Eletrônicos",price:"R$ 69,90",old:"R$ 119,90",icon:"⌚",deal:true},
- {name:"Bolsa Feminina",cat:"Moda",price:"R$ 44,90",old:"R$ 89,90",icon:"👜",deal:false},
- {name:"Tênis Casual",cat:"Moda",price:"R$ 79,90",old:"R$ 129,90",icon:"👟",deal:false},
- {name:"Massageador Portátil",cat:"Casa",price:"R$ 29,90",old:"R$ 59,90",icon:"✨",deal:true}
-];
-let category="Todos";
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=products.filter(p=>(category==="Todos"||p.cat===category||(category==="Ofertas"&&p.deal))&&p.name.toLowerCase().includes(q));
- document.getElementById("products").innerHTML=list.map(p=>`
- <article class="card">
-  <div class="product-img">${p.icon}</div>
-  <div class="card-body">
-   <div class="tag">${p.deal?"🔥 OFERTA":"ACHADO"} • ${p.cat}</div>
-   <h3>${p.name}</h3>
-   <div><span class="old">${p.old}</span><br><span class="price">${p.price}</span></div>
-   <a class="offer" href="https://shopee.com.br/" target="_blank" rel="noopener">Ver oferta →</a>
-  </div>
- </article>`).join("") || "<p>Nenhum produto encontrado.</p>";
-}
-function setCategory(c,btn){category=c;document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");render()}
-function filterProducts(){render()}
-document.getElementById("search").addEventListener("input",render);
-render();
-</script>
+      <!--
+      ==================================================
+      ÁREA DOS PRODUTOS
+
+      Os produtos serão colocados aqui.
+
+      Não coloque nada por enquanto.
+      ==================================================
+      -->
+
+      <div class="vazio">
+        <h3>📦 Nenhum produto disponível</h3>
+        <p>Novos achadinhos serão adicionados em breve!</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Achados Shopee</p>
+  </footer>
+
 </body>
 </html>
