@@ -1,595 +1,545 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achados da Shopee 🛍️</title>
 
-  <meta name="description" content="Achados da Shopee - ofertas e produtos incríveis.">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-  <title>Achados da Shopee</title>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+/* CABEÇALHO */
+header {
+    background: #111;
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    border-bottom: 5px solid #ff6500;
+}
 
-    body {
-      background: #f5f5f5;
-      color: #222;
-    }
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
 
-    header {
-      background: #111;
-      color: white;
-      padding: 18px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+header p {
+    color: #ddd;
+}
 
-    .header-content {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
+/* CONTEÚDO */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px;
+}
 
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-    }
+/* BUSCA */
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ff6500;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 20px;
+}
 
-    .logo span {
-      color: #ff5a00;
-    }
+/* CATEGORIAS */
+.categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+}
 
-    .tagline {
-      color: #ddd;
-      font-size: 14px;
-    }
+.categories button {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 11px 17px;
+    border-radius: 25px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: bold;
+}
 
-    .banner {
-      background: linear-gradient(135deg, #ff5a00, #ff8a00);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
+.categories button:hover,
+.categories button.active {
+    background: #ff6500;
+}
 
-    .banner h1 {
-      font-size: clamp(32px, 8vw, 55px);
-      margin-bottom: 12px;
-    }
+/* CONTADOR */
+.count {
+    text-align: center;
+    color: #777;
+    margin-bottom: 20px;
+}
 
-    .banner p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
+/* PRODUTOS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
 
-    .banner-button {
-      display: inline-block;
-      background: #111;
-      color: white;
-      text-decoration: none;
-      padding: 14px 25px;
-      border-radius: 30px;
-      font-weight: bold;
-    }
+.product {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    transition: .2s;
+    display: flex;
+    flex-direction: column;
+}
 
-    .banner-button:hover {
-      background: white;
-      color: #111;
-    }
+.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0,0,0,.15);
+}
 
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px 16px 50px;
-    }
+.product-image {
+    height: 150px;
+    background: #fff0e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 55px;
+}
 
-    .search {
-      width: 100%;
-      padding: 16px;
-      border: 2px solid #ddd;
-      border-radius: 14px;
-      font-size: 16px;
-      outline: none;
-      margin-bottom: 30px;
-    }
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
-    .search:focus {
-      border-color: #ff5a00;
-    }
+.category {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 7px;
+}
 
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      gap: 10px;
-    }
+.product h2 {
+    font-size: 16px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
 
-    .section-title h2 {
-      font-size: 25px;
-    }
+.price {
+    color: #ff5a00;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 12px;
+}
 
-    .section-title span {
-      color: #ff5a00;
-      font-weight: bold;
-    }
+.buy {
+    display: block;
+    background: #ff6500;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 12px;
+    border-radius: 9px;
+    font-weight: bold;
+}
 
-    .categories {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 35px;
-    }
+.buy:hover {
+    background: #e95400;
+}
 
-    .category {
-      border: none;
-      background: white;
-      padding: 12px 18px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+/* RODAPÉ */
+footer {
+    margin-top: 40px;
+    background: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 25px 15px;
+}
 
-    .category:hover,
-    .category.active {
-      background: #ff5a00;
-      color: white;
-    }
+footer strong {
+    color: white;
+}
 
+/* CELULAR */
+@media (max-width: 900px) {
     .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
     }
+}
 
-    .product {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: 0.2s;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+@media (max-width: 650px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     .product-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: #eee;
+        height: 110px;
+        font-size: 42px;
     }
 
-    .product-content {
-      padding: 15px;
+    .product-info {
+        padding: 11px;
     }
 
-    .product-category {
-      color: #777;
-      font-size: 12px;
-      margin-bottom: 7px;
-    }
-
-    .product h3 {
-      font-size: 17px;
-      line-height: 1.3;
-      margin-bottom: 10px;
+    .product h2 {
+        font-size: 14px;
     }
 
     .price {
-      color: #ff5a00;
-      font-size: 23px;
-      font-weight: bold;
-      margin-bottom: 12px;
+        font-size: 17px;
     }
 
-    .product-button {
-      display: block;
-      text-align: center;
-      background: #111;
-      color: white;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .product-button:hover {
-      background: #ff5a00;
-    }
-
-    .empty {
-      grid-column: 1 / -1;
-      background: white;
-      padding: 40px 20px;
-      border-radius: 16px;
-      text-align: center;
-      color: #777;
-    }
-
-    .empty-icon {
-      font-size: 45px;
-      margin-bottom: 10px;
-    }
-
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 35px 20px;
-    }
-
-    footer h3 {
-      color: #ff5a00;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-
-    footer p {
-      color: #ccc;
-      margin: 6px;
-      font-size: 14px;
-    }
-
-    .social {
-      margin-top: 18px;
-    }
-
-    .social a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .social a:hover {
-      color: #ff5a00;
-    }
-
-    @media (max-width: 600px) {
-
-      .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .logo {
-        font-size: 23px;
-      }
-
-      .tagline {
-        font-size: 12px;
-      }
-
-      .banner {
-        padding: 40px 16px;
-      }
-
-      .banner h1 {
-        font-size: 34px;
-      }
-
-      .banner p {
-        font-size: 15px;
-      }
-
-      .products {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .product-image {
-        height: 150px;
-      }
-
-      .product-content {
-        padding: 11px;
-      }
-
-      .product h3 {
-        font-size: 15px;
-      }
-
-      .price {
-        font-size: 19px;
-      }
-
-      .product-button {
+    .buy {
         font-size: 13px;
-        padding: 10px 5px;
-      }
+        padding: 10px;
     }
-  </style>
+
+    header h1 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 380px) {
+    .products {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="header-content">
+<header>
+    <h1>🛍️ Achados da Shopee</h1>
+    <p>Ofertas e achadinhos incríveis em um só lugar!</p>
+</header>
 
-      <div class="logo">
-        🛍️ Achados <span>da Shopee</span>
-      </div>
-
-      <div class="tagline">
-        🔥 Ofertas e achadinhos todos os dias
-      </div>
-
-    </div>
-  </header>
-
-  <section class="banner">
-
-    <h1>Achados da Shopee 🔥</h1>
-
-    <p>
-      Produtos incríveis, ofertas e achadinhos que você precisa conhecer!
-    </p>
-
-    <a href="#produtos" class="banner-button">
-      🛒 Ver ofertas
-    </a>
-
-  </section>
-
-  <main>
+<div class="container">
 
     <input
-      type="search"
-      id="search"
-      class="search"
-      placeholder="🔎 Procurar um produto..."
+        type="text"
+        id="search"
+        class="search"
+        placeholder="🔎 Procurar produto..."
     >
 
-    <div class="section-title">
-      <h2>🛍️ Categorias</h2>
-      <span>Achadinhos</span>
-    </div>
-
     <div class="categories">
-
-      <button class="category active" data-category="Todos">
-        Todos
-      </button>
-
-      <button class="category" data-category="Eletrônicos">
-        📱 Eletrônicos
-      </button>
-
-      <button class="category" data-category="Moda">
-        👕 Moda
-      </button>
-
-      <button class="category" data-category="Casa">
-        🏠 Casa
-      </button>
-
-      <button class="category" data-category="Beleza">
-        💄 Beleza
-      </button>
-
-      <button class="category" data-category="Outros">
-        ⭐ Outros
-      </button>
-
+        <button class="active" onclick="filterCategory('Todos', this)">Todos</button>
+        <button onclick="filterCategory('Feminino', this)">👗 Feminino</button>
+        <button onclick="filterCategory('Masculino', this)">🧥 Masculino</button>
+        <button onclick="filterCategory('Eletrônicos', this)">📱 Eletrônicos</button>
+        <button onclick="filterCategory('Beleza', this)">💄 Beleza</button>
+        <button onclick="filterCategory('Casa e Cozinha', this)">🏠 Casa e Cozinha</button>
+        <button onclick="filterCategory('Íntimos', this)">🩲 Íntimos</button>
+        <button onclick="filterCategory('Moletons', this)">🧥 Moletons</button>
     </div>
 
-    <div class="section-title" id="produtos">
-      <h2>🔥 Achadinhos em destaque</h2>
-    </div>
+    <div id="count" class="count"></div>
 
-    <section class="products" id="productList"></section>
+    <div id="products" class="products"></div>
 
-  </main>
+</div>
 
-  <footer>
-
-    <h3>🛍️ Achados da Shopee</h3>
-
-    <p>
-      Encontre ofertas e produtos selecionados.
+<footer>
+    <strong>🛍️ Achados da Shopee</strong>
+    <p style="margin-top:8px;">
+        Encontre produtos incríveis e confira as ofertas diretamente na Shopee.
     </p>
+</footer>
 
-    <p>
-      Alguns links podem ser links de afiliado.
-    </p>
+<script>
 
-    <div class="social">
+const products = [
 
-      <a
-        href="https://www.instagram.com/centraldosachadinhos_7/"
-        target="_blank"
-        rel="noopener"
-      >
-        📸 Instagram
-      </a>
+{
+name: "Sanduicheira Grill Elétrica 750W Antiaderente",
+price: "R$ 60,00",
+category: "Casa e Cozinha",
+icon: "🍳",
+link: "https://s.shopee.com.br/113IDvUCBf"
+},
 
-    </div>
+{
+name: "Kit 4 Blusas Femininas Ribana Canelado Básica",
+price: "R$ 65,24 – R$ 74,15",
+category: "Feminino",
+icon: "👚",
+link: "https://s.shopee.com.br/3LRD0Hx9n7"
+},
 
-  </footer>
+{
+name: "Corta Vento Jaqueta Masculino com Capuz e Bolso",
+price: "R$ 34,99 – R$ 49,99",
+category: "Masculino",
+icon: "🧥",
+link: "https://s.shopee.com.br/5LCHO1sObB"
+},
 
-  <script>
+{
+name: "Jaqueta Bobojaco Impermeável Nylon Puffer Masculino",
+price: "R$ 62,20 – R$ 64,75",
+category: "Masculino",
+icon: "🧥",
+link: "https://s.shopee.com.br/6q15Ao3sdn"
+},
 
-    /*
-    ==========================================
-    SEUS PRODUTOS
-    ==========================================
+{
+name: "Carregador Portátil Turbo 20.000mAh Power Bank",
+price: "R$ 56,34 – R$ 67,22",
+category: "Eletrônicos",
+icon: "🔋",
+link: "https://s.shopee.com.br/80D2Z0FpHB"
+},
 
-    Para adicionar um produto, copie este modelo:
+{
+name: "Fones E6S TWS Bluetooth com Microfone",
+price: "R$ 17,56 – R$ 18,51",
+category: "Eletrônicos",
+icon: "🎧",
+link: "https://s.shopee.com.br/1BMiQViUDL"
+},
 
-    {
-      name: "Nome do produto",
-      category: "Eletrônicos",
-      price: "R$ 29,90",
-      image: "LINK DA FOTO",
-      link: "LINK DA SHOPEE"
-    }
+{
+name: "Meias Masculinas Cano Alto Macias e Resistentes",
+price: "R$ 21,99 – R$ 47,99",
+category: "Masculino",
+icon: "🧦",
+link: "https://s.shopee.com.br/LnbR3ayep"
+},
 
-    */
+{
+name: "Saia Feminina Cintura Alta Couro Courino",
+price: "R$ 27,99 – R$ 31,99",
+category: "Feminino",
+icon: "👗",
+link: "https://s.shopee.com.br/AAHX9BtST2"
+},
 
-  const products = [
-  {
-    name: "Pipoqueira Elétrica Popcorn Maker 110V",
-    category: "Casa",
-    price: "R$ 66,82",
-    image: "https://via.placeholder.com/500x500?text=Pipoqueira",
-    link: "https://s.shopee.com.br/9KiPn8oZtT"
-  }
+{
+name: "Kit 5 Lençóis de Microfibra Solteiro com Elástico",
+price: "R$ 65,68",
+category: "Casa e Cozinha",
+icon: "🛏️",
+link: "https://s.shopee.com.br/3g43PI8BxY"
+},
+
+{
+name: "Conjunto Feminino Cropped + Short Saia com Fivela",
+price: "R$ 59,00",
+category: "Feminino",
+icon: "👗",
+link: "https://s.shopee.com.br/2gBWDV6O4y"
+},
+
+{
+name: "Vestido Longo Elegante Costa Nua com Fenda Lateral",
+price: "R$ 31,99 – R$ 32,89",
+category: "Feminino",
+icon: "👗",
+link: "https://s.shopee.com.br/qjs2B3HpA"
+},
+
+{
+name: "Kit Calcinhas Femininas Algodão/Microfibra",
+price: "R$ 29,99 – R$ 49,99",
+category: "Íntimos",
+icon: "🩲",
+link: "https://s.shopee.com.br/30oMcCu25p"
+},
+
+{
+name: "Tapete Peludo 2,00 × 1,50m para Sala ou Quarto",
+price: "R$ 65,90",
+category: "Casa e Cozinha",
+icon: "🏠",
+link: "https://s.shopee.com.br/BUBF3hClU"
+},
+
+{
+name: "Máquina de Barbear e Aparador de Pelos 3 em 1",
+price: "R$ 48,47",
+category: "Beleza",
+icon: "🪒",
+link: "https://s.shopee.com.br/qjs2JQSAB"
+},
+
+{
+name: "Kit Facial Kokeshi Completo 3 Passos",
+price: "R$ 59,90",
+category: "Beleza",
+icon: "🧴",
+link: "https://s.shopee.com.br/5VVhavlcAb"
+},
+
+{
+name: "Kit Dupla Renovadores Faciais Kokeshi",
+price: "R$ 39,90",
+category: "Beleza",
+icon: "✨",
+link: "https://s.shopee.com.br/qjs2OBEbX"
+},
+
+{
+name: "Corta Vento Masculina Impermeável Semi Forrada Preto",
+price: "R$ 59,89",
+category: "Masculino",
+icon: "🧥",
+link: "https://s.shopee.com.br/9fLGYeuOhy"
+},
+
+{
+name: "Pijama Baby Doll Feminino com Detalhes de Renda",
+price: "R$ 25,90 – R$ 64,89",
+category: "Íntimos",
+icon: "🌙",
+link: "https://s.shopee.com.br/8V9JAY6pYD"
+},
+
+{
+name: "Kit Facas + Tesoura + Descascador para Cozinha — 6 Peças",
+price: "R$ 23,90",
+category: "Casa e Cozinha",
+icon: "🔪",
+link: "https://s.shopee.com.br/6AlOOJJ6jW"
+},
+
+{
+name: "Porta Temperos Giratório — 9 Potes de Vidro",
+price: "R$ 37,89",
+category: "Casa e Cozinha",
+icon: "🧂",
+link: "https://s.shopee.com.br/1qcPENGzWH"
+},
+
+{
+name: "Moletom Itália Milano com Capuz Flanelado",
+price: "R$ 56,94 – R$ 62,93",
+category: "Moletons",
+icon: "🇮🇹",
+link: "https://s.shopee.com.br/80D2ZkJFAI"
+},
+
+{
+name: "Moletom Canguru Unissex Premium — Forrado",
+price: "R$ 66,94",
+category: "Moletons",
+icon: "🧥",
+link: "https://s.shopee.com.br/6L4oajfuGU"
+}
+
 ];
 
-];
+let selectedCategory = "Todos";
 
-      {
-        name: "Seu primeiro achadinho",
-        category: "Outros",
-        price: "R$ 00,00",
-        image: "https://via.placeholder.com/500x500?text=Achado+da+Shopee",
-        link: "https://shopee.com.br/"
-      }
+function showProducts() {
 
-    ];
+    const search = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
 
-    const productList =
-      document.getElementById("productList");
+    const container = document.getElementById("products");
 
-    const search =
-      document.getElementById("search");
+    const filtered = products.filter(product => {
 
-    let selectedCategory = "Todos";
-
-    function showProducts() {
-
-      const searchText =
-        search.value.toLowerCase().trim();
-
-      const filteredProducts =
-        products.filter(product => {
-
-          const categoryMatch =
+        const categoryMatch =
             selectedCategory === "Todos" ||
             product.category === selectedCategory;
 
-          const searchMatch =
-            product.name
-              .toLowerCase()
-              .includes(searchText);
+        const searchMatch =
+            product.name.toLowerCase().includes(search);
 
-          return categoryMatch && searchMatch;
+        return categoryMatch && searchMatch;
 
-        });
+    });
 
-      if (filteredProducts.length === 0) {
+    document.getElementById("count").innerText =
+        filtered.length +
+        (filtered.length === 1
+        ? " produto encontrado"
+        : " produtos encontrados");
 
-        productList.innerHTML = `
+    container.innerHTML = "";
 
-          <div class="empty">
+    filtered.forEach(product => {
 
-            <div class="empty-icon">
-              🛍️
+        const card = document.createElement("div");
+
+        card.className = "product";
+
+        card.innerHTML = `
+
+            <div class="product-image">
+                ${product.icon}
             </div>
 
-            <h3>
-              Nenhum produto encontrado.
-            </h3>
+            <div class="product-info">
 
-            <p>
-              Tente procurar outro produto.
-            </p>
+                <div class="category">
+                    ${product.category}
+                </div>
 
-          </div>
+                <h2>
+                    ${product.name}
+                </h2>
 
+                <div class="price">
+                    ${product.price}
+                </div>
+
+                <a
+                    href="${product.link}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="buy"
+                >
+                    🛒 Comprar na Shopee
+                </a>
+
+            </div>
         `;
 
-        return;
-      }
+        container.appendChild(card);
 
-      productList.innerHTML =
-        filteredProducts.map(product => `
+    });
 
-          <article class="product">
+}
 
-            <img
-              class="product-image"
-              src="${product.image}"
-              alt="${product.name}"
-              loading="lazy"
-            >
+function filterCategory(category, button) {
 
-            <div class="product-content">
-
-              <div class="product-category">
-                ${product.category}
-              </div>
-
-              <h3>
-                ${product.name}
-              </h3>
-
-              <div class="price">
-                ${product.price}
-              </div>
-
-              <a
-                class="product-button"
-                href="${product.link}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🛒 Ver na Shopee
-              </a>
-
-            </div>
-
-          </article>
-
-        `).join("");
-
-    }
+    selectedCategory = category;
 
     document
-      .querySelectorAll(".category")
-      .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-          document
-            .querySelectorAll(".category")
-            .forEach(btn =>
-              btn.classList.remove("active")
-            );
-
-          button.classList.add("active");
-
-          selectedCategory =
-            button.dataset.category;
-
-          showProducts();
-
+        .querySelectorAll(".categories button")
+        .forEach(btn => {
+            btn.classList.remove("active");
         });
 
-      });
-
-    search.addEventListener(
-      "input",
-      showProducts
-    );
+    button.classList.add("active");
 
     showProducts();
+}
 
-  </script>
+document
+    .getElementById("search")
+    .addEventListener("input", showProducts);
+
+showProducts();
+
+</script>
 
 </body>
 </html>
